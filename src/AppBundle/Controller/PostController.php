@@ -30,6 +30,7 @@ class PostController extends Controller
     public function singleAction($slug)
     {
         $data = ['slug' => $slug];
+
         return $this->render("posts/single.html.twig", $data);
     }
 }
