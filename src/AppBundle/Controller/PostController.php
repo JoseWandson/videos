@@ -84,6 +84,20 @@ class PostController extends Controller
     }
 
     /**
+     * @Route("/remove/{post}")
+     * @return Response
+     */
+    public function removeAction(Post $post)
+    {
+        $this->getDoctrine()->getEntityManager()->remove($post);
+        $this->getDoctrine()->getEntityManager()->flush();
+
+        $this->addFlash("warning", "Post excluído com sucesso!");
+
+        return $this->redirect('/posts');
+    }
+
+    /**
      * @Route("/post/{slug}")
      * @return Response
      */

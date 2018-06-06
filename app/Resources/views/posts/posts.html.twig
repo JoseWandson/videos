@@ -4,6 +4,7 @@
     <div class="container">
         <a href="/posts/create" class="btn btn-primary float-right">Cria Post</a>
         <br>
+        <br>
         <div class="col-md-12">
             {% include('includes/messages.html.twig') %}
         </div>
@@ -11,6 +12,8 @@
             {% for p in posts %}
                 <div class="posts">
                     <h2><a href="/posts/edit/{{ p.id }}">{{ p.title }}</a></h2>
+                    <small><a href="/posts/remove/{{ p.id }}">DELETAR</a></small>
+                    <br>
                     <small>Criado em {{ p.createdAt|date("d/m/Y H:i:s") }}</small>
                     <p>
                         {{ p.content }}
