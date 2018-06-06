@@ -4,8 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/posts")
@@ -28,9 +30,24 @@ class PostController extends Controller
      * @Route("/create")
      * @return Response
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
         $form = $this->createForm(PostType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+            $post = $form->getData();
+            $post->setCreatedAt(new \DateTime("now", new \DateTimeZone("America/Sao_Paulo")));
+            $post->setUpdatedAt(new \DateTime("now", new \DateTimeZone("America/Sao_Paulo")));
+
+            $doctrine = $this->getDoctrine()->getEntityManager();
+
+            $doctrine->persist($post);
+            $doctrine->flush();
+
+            return $this->redirect('/posts');
+        }
 
         return $this->render("posts/create.html.twig", ['form' => $form->createView()]);
     }
