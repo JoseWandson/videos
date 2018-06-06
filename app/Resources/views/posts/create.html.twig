@@ -2,12 +2,17 @@
 
 {% block body %}
     <div class="container">
-        {{ form_start(form) }}
+        <div class="col-md-12">
+            {% include('includes/messages.html.twig') %}
+        </div>
+        <div class="col-md-12">
+            {{ form_start(form) }}
 
-        {{ form_widget(form) }}
+            {{ form_widget(form) }}
 
-        <button type="submit" class="btn-lg btn btn-success">Salvar</button>
+            <button type="submit" class="btn-lg btn btn-success">Salvar</button>
 
-        {{ form_end(form) }}
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
