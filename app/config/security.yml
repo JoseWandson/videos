@@ -28,3 +28,8 @@ security:
     encoders:
         AdminBundle\Entity\User:
             algorithm: bcrypt
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/new-user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
