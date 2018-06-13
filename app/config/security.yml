@@ -6,7 +6,7 @@ security:
     providers:
         db:
             entity:
-                class: AdminBundle\Entity\User
+                class: Wandson\AdminBundle\Entity\User
                 property: email
 
     firewalls:
@@ -26,10 +26,10 @@ security:
                 target: /
 
     encoders:
-        AdminBundle\Entity\User:
+        Wandson\AdminBundle\Entity\User:
             algorithm: bcrypt
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/new-user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/new-user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
