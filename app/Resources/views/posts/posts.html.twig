@@ -2,7 +2,9 @@
 
 {% block body %}
     <div class="container">
-        <a href="/posts/create" class="btn btn-primary float-right">Cria Post</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="/posts/create" class="btn btn-primary float-right">Cria Post</a>
+        {% endif %}
         <br>
         <br>
         <div class="col-md-12">
@@ -12,7 +14,9 @@
             {% for p in posts %}
                 <div class="posts">
                     <h2><a href="/posts/edit/{{ p.id }}">{{ p.title }}</a></h2>
-                    <small><a href="/posts/remove/{{ p.id }}">DELETAR</a></small>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <small><a href="/posts/remove/{{ p.id }}">DELETAR</a></small>
+                    {% endif %}
                     <br>
                     <small>Criado em {{ p.createdAt|date("d/m/Y H:i:s") }}</small>
                     <p>
